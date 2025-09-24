@@ -55,32 +55,35 @@ Explicit subcommand (same result as calling root):
 - appkey: segmented string (segments \* segment-length) separated by dashes
 - guid: UUID v4 (length fixed to 36 including dashes, ignores other flags except format)
 
-## Flags (Generic / AppKey)
+## Flags
 
-| Flag             | Description                     | Default |
-| ---------------- | ------------------------------- | ------- | ---- | ------- |
-| --length, -l     | Total length (generic only)     | 16      |
-| --format, -f     | generic                         | appkey  | guid | generic |
-| --lower          | Include lowercase letters       | true    |
-| --upper          | Include uppercase letters       | true    |
-| --number         | Include digits                  | true    |
-| --symbol         | Include symbols                 | true    |
-| --min-lower      | Minimum lowercase letters       | 0       |
-| --min-upper      | Minimum uppercase letters       | 0       |
-| --min-number     | Minimum digits                  | 0       |
-| --min-symbol     | Minimum symbols                 | 0       |
-| --segments       | Number of segments (appkey)     | 4       |
-| --segment-length | Characters per segment (appkey) | 4       |
+The table below lists flags relevant to the generic and appkey formats. (The guid format ignores all except `--format`.)
 
-(Booleans can be disabled with --flag=false)
+| Flag               | Type   | Default | Applies To      | Description                                   |
+| ------------------ | ------ | ------- | --------------- | --------------------------------------------- |
+| `--length, -l`     | int    | 16      | generic         | Total length (generic only)                   |
+| `--format, -f`     | string | generic | all             | Output format: `generic`, `appkey`, or `guid` |
+| `--lower`          | bool   | true    | generic, appkey | Include lowercase letters                     |
+| `--upper`          | bool   | true    | generic, appkey | Include uppercase letters                     |
+| `--number`         | bool   | true    | generic, appkey | Include digits                                |
+| `--symbol`         | bool   | true    | generic, appkey | Include symbols                               |
+| `--min-lower`      | int    | 0       | generic, appkey | Minimum lowercase letters                     |
+| `--min-upper`      | int    | 0       | generic, appkey | Minimum uppercase letters                     |
+| `--min-number`     | int    | 0       | generic, appkey | Minimum digits                                |
+| `--min-symbol`     | int    | 0       | generic, appkey | Minimum symbols                               |
+| `--segments`       | int    | 4       | appkey          | Number of segments                            |
+| `--segment-length` | int    | 4       | appkey          | Characters per segment                        |
+
+(Disable booleans with `--flag=false`.)
 
 ## Minimum Counts
 
 You may specify any combination of:
---min-lower
---min-upper
---min-number
---min-symbol
+
+- `--min-lower`
+- `--min-upper`
+- `--min-number`
+- `--min-symbol`
 
 Constraints:
 
@@ -105,7 +108,7 @@ All character class rules (toggles and minima) apply to the total character pool
 `pwgen --format guid`
 
 - Ignores length and character class flags
-- Returns RFC 4122 version 4 UUID (e.g. 3d3f3c54-2f47-4e4e-a3ab-e2f9e899b8d2)
+- Returns RFC 4122 version 4 UUID (e.g. `3d3f3c54-2f47-4e4e-a3ab-e2f9e899b8d2`)
 
 ## Exit Codes
 
@@ -134,9 +137,9 @@ If you need to exclude ambiguous characters (like O/0, l/1) or generate multiple
 
 ## Planned / Possible Enhancements
 
-- --count N to emit multiple values
-- --exclude-similar to drop visually ambiguous runes
-- --no-repeat to prevent repeated characters
+- `--count N` to emit multiple values
+- `--exclude-similar` to drop visually ambiguous runes
+- `--no-repeat` to prevent repeated characters
 - Pronounceable / dictionary-based modes
 - Output JSON or structured metadata
 
@@ -146,11 +149,11 @@ You can import the generator package:
 
 `import "github.com/yourusername/pwgen/internal/generator"`
 
-Construct options and call generator.Generate.
+Construct options and call `generator.Generate`.
 
 ## License
 
-MIT (adjust as desired)
+MIT License. See LICENSE file.
 
 ## Help
 
@@ -158,7 +161,3 @@ Run:
 `pwgen --help`
 or
 `pwgen generate --help`
-
----
-
-Happy generating!
